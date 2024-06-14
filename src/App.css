@@ -1,3 +1,4 @@
+/* Estilo general para el contenedor principal */
 #root {
   max-width: 1280px;
   margin: 0 auto;
@@ -5,19 +6,25 @@
   text-align: center;
 }
 
+/* Estilos para los logotipos */
 .logo {
   height: 6em;
   padding: 1.5em;
   will-change: filter;
   transition: filter 300ms;
 }
+
+/* Efecto de sombra al pasar el mouse sobre el logotipo */
 .logo:hover {
   filter: drop-shadow(0 0 2em #646cffaa);
 }
+
+/* Efecto específico para el logotipo de React al pasar el mouse */
 .logo.react:hover {
   filter: drop-shadow(0 0 2em #61dafbaa);
 }
 
+/* Animación de rotación para el logotipo */
 @keyframes logo-spin {
   from {
     transform: rotate(0deg);
@@ -27,16 +34,146 @@
   }
 }
 
+/* Aplicar la animación de rotación al segundo logotipo si no se prefiere la reducción de movimiento */
 @media (prefers-reduced-motion: no-preference) {
   a:nth-of-type(2) .logo {
     animation: logo-spin infinite 20s linear;
   }
 }
 
+/* Estilos para la tarjeta */
 .card {
   padding: 2em;
 }
 
+/* Estilos para el texto de lectura de documentación */
 .read-the-docs {
   color: #888;
+}
+
+/* Estilos para la sección de productos */
+.products {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+}
+
+.products ul {
+  list-style: none;
+  padding: 0;
+}
+
+.products li {
+  width: 300px;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+  text-align: center;
+}
+
+.products li:hover {
+  transform: translateY(-5px);
+}
+
+.products li img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+}
+
+.products li .product-info {
+  padding: 1em;
+}
+
+.products li p {
+  margin: 0.5em 0;
+  color: #333; /* Color de texto para mejorar la legibilidad */
+}
+
+.products li button {
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  padding: 0.75em 1em;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
+  width: 100%;
+  margin-top: 1em;
+}
+
+.products li button:hover {
+  background-color: #45a049;
+}
+
+/* Estilos para la tarjeta del carrito */
+.cart {
+  margin-top: 2rem;
+}
+
+.cart h2 {
+  text-align: center;
+  margin-bottom: 1rem;
+  color: #333;
+}
+
+.cart ul {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+}
+
+.cart li {
+  width: 300px;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+  text-align: center;
+}
+
+.cart li:hover {
+  transform: translateY(-5px);
+}
+
+.cart li img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+}
+
+.cart li .product-info {
+  padding: 1em;
+}
+
+.cart li p {
+  margin: 0.5em 0;
+  color: #333; /* Color de texto para mejorar la legibilidad */
+}
+
+.cart li button {
+  background-color: #f44336;
+  color: white;
+  border: none;
+  padding: 0.75em 1em;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
+  width: 100%;
+  margin-top: 1em;
+}
+
+.cart li button:hover {
+  background-color: #d32f2f;
 }
