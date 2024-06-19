@@ -4,6 +4,8 @@ import viteLogo from '/vite.svg';
 import './App.css';
 import FloatingButton from './components/FloatingButton';
 import { BsCart } from 'react-icons/bs';
+import 'bootstrap/dist/css/bootstrap.min.css'; // Import Bootstrap CSS
+import { Container, Row, Col, Button, Form, Card } from 'react-bootstrap'; // Import React-Bootstrap components
 
 function App() {
   const [cart, setCart] = useState([]);
@@ -83,104 +85,128 @@ function App() {
   };
 
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Supermercado Olaf</h1>
+    <Container>
+      <h1 className="my-4 text-center">Supermercado Olaf</h1>
       {!isAdmin && (
-        <div className="login">
-          <input
-            type="text"
-            placeholder="Usuario"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-          />
-          <input
-            type="password"
-            placeholder="Contraseña"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
-          <button onClick={handleLogin}>Iniciar Sesión</button>
-        </div>
+        <Row className="justify-content-center">
+          <Col xs={12} md={6}>
+            <Form>
+              <Form.Group controlId="formUsername">
+                <Form.Control
+                  type="text"
+                  placeholder="Usuario"
+                  value={username}
+                  onChange={(e) => setUsername(e.target.value)}
+                />
+              </Form.Group>
+              <Form.Group controlId="formPassword" className="mt-3">
+                <Form.Control
+                  type="password"
+                  placeholder="Contraseña"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                />
+              </Form.Group>
+              <Button className="mt-3" onClick={handleLogin}>Iniciar Sesión</Button>
+            </Form>
+          </Col>
+        </Row>
       )}
       {isAdmin && (
-        <button onClick={handleLogout}>Cerrar Sesión</button>
+        <Button className="mt-3 mb-3" onClick={handleLogout}>Cerrar Sesión</Button>
       )}
-      <div className="card">
-        <p>
-          Carrito: ${getTotalPrice().toFixed(2)}
-        </p>
-        <BsCart size={30} color="#000" />
-      </div>
-      <div className="products">
-        <h2>Productos</h2>
-        <ul>
-          {products.map(product => (
-            <li key={product.id}>
-              <div>
-                <img src={product.image} alt={product.name} />
-                <div>
-                  <p>{product.name}</p>
-                  <p>${product.price.toFixed(2)}</p>
-                </div>
-              </div>
-              {!isAdmin && (
-                <button onClick={() => addToCart(product)}>Agregar al carrito</button>
-              )}
-              {isAdmin && (
-                <button onClick={() => removeProduct(product.id)}>Eliminar</button>
-              )}
-            </li>
-          ))}
-        </ul>
-        {isAdmin && (
-          <div className="add-product">
-            <input
-              type="text"
-              placeholder="Nombre del producto"
-              value={newProductName}
-              onChange={(e) => setNewProductName(e.target.value)}
-            />
-            <input
-              type="number"
-              placeholder="Precio del producto"
-              value={newProductPrice}
-              onChange={(e) => setNewProductPrice(e.target.value)}
-            />
-            <input
-              type="file"
-              onChange={handleImageUpload}
-            />
-            <button onClick={addProduct}>Agregar Producto</button>
-          </div>
-        )}
-      </div>
-      <div className="cart">
-        <h2>Carrito</h2>
-        <ul>
-          {cart.map(item => (
-            <li key={item.cartId}>
-              <div>
-                <img src={item.image} alt={item.name} />
-                <div>
-                  <p>{item.name}</p>
-                  <p>${item.price.toFixed(2)}</p>
-                </div>
-              </div>
-              <button onClick={() => removeFromCart(item.cartId)}>Quitar del carrito</button>
-            </li>
-          ))}
-        </ul>
-      </div>
+      <Row className="my-4">
+        <Col>
+          <Card className="p-3">
+            <Card.Body>
+              <Card.Text>
+                Carrito: ${getTotalPrice().toFixed(2)}
+              </Card.Text>
+              <BsCart size={30} color="#000" />
+            </Card.Body>
+          </Card>
+        </Col>
+      </Row>
+      <Row>
+        <Col>
+          <h2 className="mb-4">Productos</h2>
+          <Row>
+            {products.map(product => (
+              <Col xs={12} md={6} lg={4} key={product.id} className="mb-4">
+                <Card>
+                  <Card.Img variant="top" src={product.image} alt={product.name} />
+                  <Card.Body>
+                    <Card.Title>{product.name}</Card.Title>
+                    <Card.Text>${product.price.toFixed(2)}</Card.Text>
+                    {!isAdmin && (
+                      <Button onClick={() => addToCart(product)}>Agregar al carrito</Button>
+                    )}
+                    {isAdmin && (
+                      <Button variant="danger" onClick={() => removeProduct(product.id)}>Eliminar</Button>
+                    )}
+                  </Card.Body>
+                </Card>
+              </Col>
+            ))}
+          </Row>
+          {isAdmin && (
+            <Row className="mt-4">
+              <Col>
+                <Card>
+                  <Card.Body>
+                    <Form>
+                      <Form.Group controlId="formProductName">
+                        <Form.Control
+                          type="text"
+                          placeholder="Nombre del producto"
+                          value={newProductName}
+                          onChange={(e) => setNewProductName(e.target.value)}
+                        />
+                      </Form.Group>
+                      <Form.Group controlId="formProductPrice" className="mt-3">
+                        <Form.Control
+                          type="number"
+                          placeholder="Precio del producto"
+                          value={newProductPrice}
+                          onChange={(e) => setNewProductPrice(e.target.value)}
+                        />
+                      </Form.Group>
+                      <Form.Group controlId="formProductImage" className="mt-3">
+                        <Form.Control
+                          type="file"
+                          onChange={handleImageUpload}
+                        />
+                      </Form.Group>
+                      <Button className="mt-3" onClick={addProduct}>Agregar Producto</Button>
+                    </Form>
+                  </Card.Body>
+                </Card>
+              </Col>
+            </Row>
+          )}
+        </Col>
+      </Row>
+      <Row className="mt-4">
+        <Col>
+          <h2>Carrito</h2>
+          <Row>
+            {cart.map(item => (
+              <Col xs={12} key={item.cartId} className="mb-4">
+                <Card>
+                  <Card.Img variant="top" src={item.image} alt={item.name} />
+                  <Card.Body>
+                    <Card.Title>{item.name}</Card.Title>
+                    <Card.Text>${item.price.toFixed(2)}</Card.Text>
+                    <Button variant="danger" onClick={() => removeFromCart(item.cartId)}>Quitar del carrito</Button>
+                  </Card.Body>
+                </Card>
+              </Col>
+            ))}
+          </Row>
+        </Col>
+      </Row>
       <FloatingButton />
-    </>
+    </Container>
   );
 }
 
