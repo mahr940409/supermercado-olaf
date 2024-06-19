@@ -7,6 +7,8 @@ import AdminPanel from './components/AdminPanel';
 import ProductList from './components/ProductList';
 import Cart from './components/Cart';
 import ShoppingCart from './components/ShoppingCart';
+import Header from './components/Header';
+import Footer from './components/Footer';
 
 function App() {
   const [cart, setCart] = useState([]);
@@ -46,22 +48,26 @@ function App() {
   };
 
   return (
-    <div className="App">
-      <h1 className="my-4 text-center">Supermercado Olaf</h1>
-      {!isAdmin ? (
-        <Login onLogin={handleLogin} />
-      ) : (
-        <AdminPanel onLogout={handleLogout} onAddProduct={addProduct} />
-      )}
-      <Cart totalPrice={cart.reduce((total, item) => total + item.price, 0)} />
-      <ProductList
-        products={products}
-        isAdmin={isAdmin}
-        onAddToCart={addToCart}
-        onRemoveProduct={removeProduct}
-      />
-      <ShoppingCart cart={cart} onRemoveFromCart={removeFromCart} />
+    <div className="d-flex flex-column min-vh-100">
+      <Header cartItemCount={cart.length} />
+      <div className="container mt-4 flex-grow-1">
+        <h1 className="my-4 text-center">Supermercado Olaf</h1>
+        {!isAdmin ? (
+          <Login onLogin={handleLogin} />
+        ) : (
+          <AdminPanel onLogout={handleLogout} onAddProduct={addProduct} />
+        )}
+        <Cart totalPrice={cart.reduce((total, item) => total + item.price, 0)} />
+        <ProductList
+          products={products}
+          isAdmin={isAdmin}
+          onAddToCart={addToCart}
+          onRemoveProduct={removeProduct}
+        />
+        <ShoppingCart cart={cart} onRemoveFromCart={removeFromCart} />
+      </div>
       <FloatingButton />
+      <Footer />
     </div>
   );
 }

@@ -1,8 +1,13 @@
+/* Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 body {
   font-family: Arial, sans-serif;
   background-color: #f8f9fa;
-  margin: 0;
-  padding: 0;
 }
 
 h1, h2 {
@@ -40,8 +45,12 @@ input[type="file"] {
   width: 100%;
 }
 
-/* Media queries for responsiveness */
-@media (max-width: 768px) {
+footer {
+  width: 100%;
+  bottom: 0;
+}
+
+@media (max-width: 1024px) {
   h1 {
     font-size: 1.5rem;
   }
