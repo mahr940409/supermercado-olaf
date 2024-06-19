@@ -9,14 +9,9 @@ h1, h2 {
   color: #343a40;
 }
 
-.card {
-  margin: 1rem 0;
-}
-
 .card img {
   max-height: 150px;
   object-fit: cover;
-  width: 100%;
 }
 
 button {
@@ -27,7 +22,7 @@ button {
   margin-top: 2rem;
 }
 
-input[type="text"], input[type="number"], input[type="file"] {
+input[type="text"], input[type="number"] {
   margin-bottom: 1rem;
 }
 
@@ -45,16 +40,15 @@ input[type="file"] {
   width: 100%;
 }
 
+/* Media queries for responsiveness */
 @media (max-width: 768px) {
-  .card img {
-    max-height: 100px;
-  }
-
   h1 {
     font-size: 1.5rem;
   }
-
-  h2 {
-    font-size: 1.25rem;
+  .card img {
+    max-height: 100px;
+  }
+  button {
+    width: 100%;
   }
 }
